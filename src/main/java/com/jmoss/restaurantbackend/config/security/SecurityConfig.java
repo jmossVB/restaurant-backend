@@ -17,8 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityConfig
-{
+public class SecurityConfig {
+
     private final JWTFilter jwtFilter;
 
     public SecurityConfig(JWTFilter jwtFilter) {
@@ -26,22 +26,26 @@ public class SecurityConfig
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
-    {
-        http.authorizeHttpRequests(customRequest ->{
-            customRequest.requestMatchers(HttpMethod.POST,"/user/auth").permitAll()
-                    .anyRequest()
-                    .authenticated();
-        })
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(customRequest -> {
+                    customRequest.requestMatchers(HttpMethod.POST, "/user/login").permitAll();
+                    customRequest.requestMatchers(HttpMethod.POST, "/clientes").permitAll();
+                    customRequest.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
+                    customRequest.requestMatchers(HttpMethod.GET, "/api-docs/**").permitAll();
+                    customRequest.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
+                    customRequest.requestMatchers(HttpMethod.GET, "/images/**").permitAll()
+                            .anyRequest()
+                            .authenticated();
+                })
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);;
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 

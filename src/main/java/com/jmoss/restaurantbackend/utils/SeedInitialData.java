@@ -21,12 +21,12 @@ public class SeedInitialData implements CommandLineRunner {
         Cliente cliente01 = new Cliente();
         cliente01.setNombre("Juan");
         cliente01.setApellidos("Perez");
-        cliente01.setCorreo("Juan@correo.com");
+        cliente01.setCorreo("juan@correo.com");
         cliente01.setEnable(true);
         cliente01.setIdentifier("jperez");
         cliente01.setNit("123");
         cliente01.setRazonSocial("Test SA");
-        cliente01.setPassword("123456");
+        cliente01.setPassword("$2a$12$Lj.Kn9gaa6PrMw45OWFigOVxSj0juPp8xav2./DfSxZdEokAugBSq");
 
 
         Cliente cliente02 = new Cliente();
@@ -37,7 +37,7 @@ public class SeedInitialData implements CommandLineRunner {
         cliente02.setIdentifier("kmosquera");
         cliente02.setNit("321");
         cliente02.setRazonSocial("Test SA");
-        cliente02.setPassword("123456");
+        cliente02.setPassword("$2a$12$Lj.Kn9gaa6PrMw45OWFigOVxSj0juPp8xav2./DfSxZdEokAugBSq");
 
         clienteRepository.saveAll(List.of(cliente01,cliente02));
     }
