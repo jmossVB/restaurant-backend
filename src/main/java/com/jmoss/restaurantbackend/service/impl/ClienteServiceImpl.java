@@ -3,6 +3,7 @@ package com.jmoss.restaurantbackend.service.impl;
 import com.jmoss.restaurantbackend.dto.request.ClienteRequestDto;
 import com.jmoss.restaurantbackend.dto.response.ClienteResponseDto;
 import com.jmoss.restaurantbackend.entity.Cliente;
+import com.jmoss.restaurantbackend.exception.EmptyListException;
 import com.jmoss.restaurantbackend.repository.ClienteRepository;
 import com.jmoss.restaurantbackend.service.IClienteService;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class ClienteServiceImpl implements IClienteService {
             clientes = clienteRepository.findAll();
             if (clientes.size()==0)
             {
-                throw new Exception("No se encuentran clientes");
+                throw new EmptyListException("No se encuentran clientes");
             }
         }
         catch (Exception e)
