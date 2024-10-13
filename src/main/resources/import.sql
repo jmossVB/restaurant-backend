@@ -1,0 +1,2 @@
+-- insert into cliente(cli_id,cli_identifier,cli_nombre,cli_apellidos,correo,nit,enable)
+-- values (1,'000001','Juan','Perez','jperez@correo.com',321,true);

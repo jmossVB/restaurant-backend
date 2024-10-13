@@ -1,5 +1,6 @@
 package com.jmoss.restaurantbackend.service.impl;
 
+import com.jmoss.restaurantbackend.common.MessageUtil;
 import com.jmoss.restaurantbackend.dto.request.ClienteRequestDto;
 import com.jmoss.restaurantbackend.dto.response.ClienteResponseDto;
 import com.jmoss.restaurantbackend.entity.Cliente;
@@ -17,10 +18,14 @@ import java.util.stream.Collectors;
 public class ClienteServiceImpl implements IClienteService {
 
     private static final Logger log = LoggerFactory.getLogger(ClienteServiceImpl.class);
+
     private final ClienteRepository clienteRepository;
 
-    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+    private final MessageUtil messageUtil;
+
+    public ClienteServiceImpl(ClienteRepository clienteRepository, MessageUtil messageUtil) {
         this.clienteRepository = clienteRepository;
+        this.messageUtil = messageUtil;
     }
 
     @Override
@@ -32,13 +37,13 @@ public class ClienteServiceImpl implements IClienteService {
             clientes = clienteRepository.findAll();
             if (clientes.size()==0)
             {
-                throw new EmptyListException("No se encuentran clientes");
+                throw new EmptyListException(messageUtil.getMessage("message.list.empty"));
             }
         }
         catch (Exception e)
         {
             log.error(e.getMessage(), e);
-            throw new RuntimeException("Error al realizar la petición de clientes");
+            throw new RuntimeException(messageUtil.getMessage("error.bad_request"));
         }
 
         return clientes.stream().map(ClienteResponseDto::buildFromEntity)
