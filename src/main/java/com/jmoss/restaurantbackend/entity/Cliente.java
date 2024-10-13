@@ -31,6 +31,8 @@ public class Cliente {
 
     private String razonSocial;
 
+    private boolean enable;
+
     @Column(nullable = false, unique = true)
     private String nit;
 

@@ -1,7 +1,10 @@
 package com.jmoss.restaurantbackend.controller;
 
+import com.jmoss.restaurantbackend.dto.request.ClienteRequestDto;
+import com.jmoss.restaurantbackend.dto.response.ClienteResponseDto;
 import com.jmoss.restaurantbackend.entity.Cliente;
 import com.jmoss.restaurantbackend.repository.ClienteRepository;
+import com.jmoss.restaurantbackend.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +14,20 @@ import java.util.List;
 @RequestMapping("clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private IClienteService clienteService;
+
+    public ClienteController(IClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping()
-    public List<Cliente> findAllClientes() {
-        return clienteRepository.findAll();
+    public List<ClienteResponseDto> findAllClientes() {
+        return clienteService.findAllClientes();
     };
 
     @PostMapping()
-    public Cliente createClientes( @RequestBody Cliente cliente ) {
-        return clienteRepository.save(cliente);
+    public ClienteResponseDto createClientes( @RequestBody ClienteRequestDto clienteRequestDto ) {
+        return clienteService.createCliente(clienteRequestDto);
     };
 
 
