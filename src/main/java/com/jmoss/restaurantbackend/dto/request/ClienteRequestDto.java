@@ -14,7 +14,7 @@ public class ClienteRequestDto {
 
     @NotNull(message = "No se permiten valores nulos")
     @NotEmpty(message = "No se permiten valores nulos")
-    @Size(min = 3, message = "Debe tener una longitud mayor a 3 caracteres")
+    @Size(min = 3, message = "El nombre Debe tener una longitud mayor a 3 caracteres")
     private String nombre;
 
     @NotNull(message = "No se permiten valores nulos")

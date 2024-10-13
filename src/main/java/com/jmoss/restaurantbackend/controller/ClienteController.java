@@ -1,5 +1,6 @@
 package com.jmoss.restaurantbackend.controller;
 
+import com.jmoss.restaurantbackend.common.CommonResponse;
 import com.jmoss.restaurantbackend.dto.request.ClienteRequestDto;
 import com.jmoss.restaurantbackend.dto.response.ClienteResponseDto;
 import com.jmoss.restaurantbackend.entity.Cliente;
@@ -21,9 +22,14 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+//    @GetMapping()
+//    public List<ClienteResponseDto> findAllClientes() {
+//        return clienteService.findAllClientes();
+//    };
+
     @GetMapping()
-    public List<ClienteResponseDto> findAllClientes() {
-        return clienteService.findAllClientes();
+    public CommonResponse<List<ClienteResponseDto>> findAllClientes() {
+        return CommonResponse.success(clienteService.findAllClientes(),"operación ejecutada satisfactoriamente") ;
     };
 
     @PostMapping()
